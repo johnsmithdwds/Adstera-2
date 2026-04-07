@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loading...</title>
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  font-family:Arial;
+}
+
+/* Fullscreen GIF */
+.bg{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  z-index:-1;
+}
+
+/* Center content */
+.content{
+  text-align:center;
+}
+
+button{
+  padding:14px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:8px;
+  background:#00f0ff;
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 0 15px rgba(0,0,0,0.5);
+}
+</style>
+
+</head>
+<body>
+
+<!-- GIF Image -->
+<img src="https://i.gifer.com/ZZ5H.gif" class="bg">
+
+<!-- Center Button -->
+<div class="content">
+  <button onclick="goLink()">Continue</button>
+</div>
+
+<script>
+// links
+var links = [
+"https://www.profitablecpmratenetwork.com/ci81ra5wvk?key=36529391860db6f7a826bd7d07dc64bc",
+"https://www.profitablecpmratenetwork.com/vu9fe788w?key=34c7a4c3abcce8570d4112c7c10b5bc0",
+"https://www.profitablecpmratenetwork.com/iv1jyzip?key=a8ded032f56e52c55b783e36e5db9770",
+"https://www.profitablecpmratenetwork.com/u6mgmr4yny?key=907e89ff74ce2eca3005b47bc8e86c76",
+"https://www.profitablecpmratenetwork.com/gh9yty1j?key=5e086de21b92f2a81953ba7d84b99fdc"
+];
+
+// random link
+var randomLink = links[Math.floor(Math.random() * links.length)];
+
+// auto redirect 5 sec
+setTimeout(function(){
+  window.location.href = randomLink;
+}, 5000);
+
+// button click
+function goLink(){
+  window.location.href = randomLink;
+}
+</script>
+
+</body>
+</html>
