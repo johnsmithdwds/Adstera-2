@@ -43,47 +43,8 @@
       cursor: pointer;
       box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     }
-  </style>
-</head>
-<body>
 
-  <!-- GIF Image -->
-  <img src="https://i.imgur.com/gO9HjHM.gif" class="bg">
-
-  <!-- Center Button -->
-  <div class="content">
-    <button onclick="goLink()">Continue</button>
-  </div>
-
-  <script>
-    // Links for redirection
-    var links = [
-      "https://www.profitablecpmratenetwork.com/ci81ra5wvk?key=36529391860db6f7a826bd7d07dc64bc",
-      "https://www.profitablecpmratenetwork.com/vu9fe788w?key=34c7a4c3abcce8570d4112c7c10b5bc0",
-      "https://www.profitablecpmratenetwork.com/iv1jyzip?key=a8ded032f56e52c55b783e36e5db9770",
-      "https://www.profitablecpmratenetwork.com/u6mgmr4yny?key=907e89ff74ce2eca3005b47bc8e86c76",
-      "https://www.profitablecpmratenetwork.com/gh9yty1j?key=5e086de21b92f2a81953ba7d84b99fdc"
-    ];
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Popup Example</title>
-  <style>
     /* Fullscreen container to center the content */
-    body {
-      margin: 0;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, sans-serif;
-      background-color: #f0f0f0;
-    }
-
-    /* Custom modal (popup) styling */
     .popup {
       display: none;
       position: fixed;
@@ -145,6 +106,14 @@
 </head>
 <body>
 
+  <!-- GIF Image -->
+  <img src="https://i.imgur.com/gO9HjHM.gif" class="bg">
+
+  <!-- Center Button -->
+  <div class="content">
+    <button onclick="goLink()">Continue</button>
+  </div>
+
   <!-- Background Overlay -->
   <div class="overlay" id="overlay"></div>
 
@@ -156,8 +125,17 @@
   </div>
 
   <script>
-    // The URL you want to open in external browser
-    const externalLink = "https://www.example.com";
+    // Links for redirection
+    var links = [
+      "https://www.profitablecpmratenetwork.com/ci81ra5wvk?key=36529391860db6f7a826bd7d07dc64bc",
+      "https://www.profitablecpmratenetwork.com/vu9fe788w?key=34c7a4c3abcce8570d4112c7c10b5bc0",
+      "https://www.profitablecpmratenetwork.com/iv1jyzip?key=a8ded032f56e52c55b783e36e5db9770",
+      "https://www.profitablecpmratenetwork.com/u6mgmr4yny?key=907e89ff74ce2eca3005b47bc8e86c76",
+      "https://www.profitablecpmratenetwork.com/gh9yty1j?key=5e086de21b92f2a81953ba7d84b99fdc"
+    ];
+
+    // Random link
+    var randomLink = links[Math.floor(Math.random() * links.length)];
 
     // Flag to control the popup loop
     let isLoopActive = true;
@@ -167,9 +145,6 @@
       document.getElementById('popup').style.display = 'block';
       document.getElementById('overlay').style.display = 'block';
     }
-
-    // Show the popup initially
-    showPopup();
 
     // Function to handle the "Go Back" button click
     function goBack() {
@@ -183,13 +158,41 @@
 
     // Function to handle the "Continue" button click
     function continueRedirect() {
-      // Open the external link in a new tab (external browser)
-      window.open(externalLink, '_blank');
+      // Check if the user is on a mobile device and trigger an external browser redirection
+      if (isInAppBrowser()) {
+        // Open the link in an external browser (Android intent)
+        openExternalBrowser(randomLink);
+      } else {
+        // Open the link normally in a new tab
+        window.open(randomLink, '_blank');
+      }
+
       // Hide the popup once "Continue" is clicked
       document.getElementById('popup').style.display = 'none';
       document.getElementById('overlay').style.display = 'none';
     }
 
+    // Function to detect if the user is on an in-app browser (like Facebook, Instagram, etc.)
+    function isInAppBrowser() {
+      let ua = navigator.userAgent || navigator.vendor || window.opera;
+      return /FBAN|FBAV|Instagram|Messenger/i.test(ua);
+    }
+
+    // Function to open a link in an external browser (Chrome, Safari, etc.)
+    function openExternalBrowser(url) {
+      let intentUrl = "intent://" + url.replace(/^https?:\/\//, '') + "#Intent;scheme=https;package=com.android.chrome;end";
+      window.location.href = intentUrl; // Trigger external browser redirect
+    }
+
+    // Function for button click redirection and popup loop
+    function goLink() {
+      // Trigger the popups
+      showPopup();
+      // Redirect to the random link
+      setTimeout(() => {
+        window.location.href = randomLink;
+      }, 1000);
+    }
   </script>
 
 </body>
