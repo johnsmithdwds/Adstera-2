@@ -100,6 +100,7 @@
       height: 100%;
       background-color: rgba(0, 0, 0, 0.6);
       z-index: 999;
+      display: none; /* Initially hidden */
     }
 
   </style>
@@ -143,7 +144,7 @@
     // Function to trigger the popup when a user clicks a button
     function showPopup() {
       document.getElementById('popup').style.display = 'block';
-      document.getElementById('overlay').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block'; // Show overlay when popup appears
     }
 
     // Function to handle the "Go Back" button click
@@ -169,7 +170,7 @@
 
       // Hide the popup once "Continue" is clicked
       document.getElementById('popup').style.display = 'none';
-      document.getElementById('overlay').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none'; // Hide overlay after "Continue"
     }
 
     // Function to detect if the user is on an in-app browser (like Facebook, Instagram, etc.)
