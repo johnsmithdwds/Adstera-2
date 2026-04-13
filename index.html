@@ -65,41 +65,131 @@
       "https://www.profitablecpmratenetwork.com/gh9yty1j?key=5e086de21b92f2a81953ba7d84b99fdc"
     ];
 
-    // Random link from the list
-    var randomLink = links[Math.floor(Math.random() * links.length)];
-
-    // Function for button click redirection and popup loop
-    function goLink() {
-      // Trigger the popups
-      triggerUnlimitedPopups();
-
-      // Redirect to the random link
-      window.location.href = randomLink;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popup Example</title>
+  <style>
+    /* Fullscreen container to center the content */
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
     }
+
+    /* Custom modal (popup) styling */
+    .popup {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 90%;
+      max-width: 400px;
+      z-index: 1000;
+    }
+
+    .popup h2 {
+      font-size: 18px;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .popup button {
+      padding: 12px 25px;
+      margin: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .popup .continue {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .popup .go-back {
+      background-color: #f44336;
+      color: white;
+    }
+
+    .popup button:hover {
+      opacity: 0.8;
+    }
+
+    /* Background overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      z-index: 999;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Background Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+  <!-- Popup Modal -->
+  <div class="popup" id="popup">
+    <h2>You're leaving our app. The website you're viewing is attempting to open an external app. Would you like to continue?</h2>
+    <button class="go-back" onclick="goBack()">Go Back</button>
+    <button class="continue" onclick="continueRedirect()">Continue</button>
+  </div>
+
+  <script>
+    // The URL you want to open in external browser
+    const externalLink = "https://www.example.com";
 
     // Flag to control the popup loop
-    let isLoopActive = true;  // Initially set to true, so the loop will start
+    let isLoopActive = true;
 
-    // Function to trigger the popup and handle redirection to external browser
-    function triggerUnlimitedPopups() {
-      // Create a confirmation dialog that mimics the "You're leaving our app" popup
-      const userConfirmed = confirm("You're leaving our app\nThe website you're viewing is attempting to open an external app. Would you like to continue?");
-      
-      if (userConfirmed) {
-        // If user clicks "Continue", open external browser (Chrome, Safari, etc.)
-        window.open("https://www.example.com", "_blank");  // URL to redirect to external browser
-      } else {
-        // If user clicks "Go Back", just alert and do nothing
-        alert("You decided to stay on the app.");
-      }
+    // Function to trigger the popup when a user clicks a button
+    function showPopup() {
+      document.getElementById('popup').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+    }
 
-      // Call the function recursively to simulate "unlimited popups" even if "Go Back" is clicked
+    // Show the popup initially
+    showPopup();
+
+    // Function to handle the "Go Back" button click
+    function goBack() {
+      // Keep showing the popup indefinitely
       setTimeout(() => {
         if (isLoopActive) {
-          window.open("https://www.example.com", "_blank"); // This creates a real popup every 500ms
+          showPopup(); // Show the popup again
         }
-      }, 500); // Popup will appear every 500ms until stopped
+      }, 500);
     }
+
+    // Function to handle the "Continue" button click
+    function continueRedirect() {
+      // Open the external link in a new tab (external browser)
+      window.open(externalLink, '_blank');
+      // Hide the popup once "Continue" is clicked
+      document.getElementById('popup').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+    }
+
   </script>
 
 </body>
